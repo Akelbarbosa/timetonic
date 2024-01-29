@@ -47,6 +47,8 @@ class LogInView: UIViewController {
         return stack
     }()
     
+    var activityIndicator: UIActivityIndicatorView?
+    
     
     //MARK: - Configure Views
     private func configureViews() {
@@ -99,7 +101,6 @@ class LogInView: UIViewController {
         containerStackView.addArrangedSubview(logInButton)
         logInButton.setTitle("Log In", for: .normal)
         logInButton.setTitleColor(.white, for: .normal)
-        logInButton.setTitleColor(.black, for: .disabled)
         logInButton.backgroundColor = .systemGreen
         logInButton.layer.cornerRadius = 10
         logInButton.isEnabled = true
@@ -146,13 +147,62 @@ class LogInView: UIViewController {
         passwordErrorLabel.text = ""
     }
     
+    private func activateActivityIndicator() {
+        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .white
+        
+        logInButton.setTitle("", for: .normal)
+        logInButton.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: logInButton.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: logInButton.centerYAnchor)
+        ])
+        
+        activityIndicator.startAnimating()
+        self.activityIndicator = activityIndicator
+        
+        logInButton.isEnabled = false
+        emailTextField.isUserInteractionEnabled = false
+        passwordTextField.isUserInteractionEnabled = false
+    }
+    
+    private func desactivateActivityIndicator() {
+        activityIndicator?.stopAnimating()
+        activityIndicator?.removeFromSuperview()
+        activityIndicator = nil
+        
+        logInButton.setTitle("Log In", for: .normal)
+        
+        logInButton.isEnabled = true
+        emailTextField.isUserInteractionEnabled = true
+        passwordTextField.isUserInteractionEnabled = true
+    }
+    
 
     
 }
 
 //MARK: - Presenter Delegate
 extension LogInView: LogInPresenterDelegate {
+    func showActivityIndicator() {
+        DispatchQueue.main.async {[weak self] in
+            self?.activateActivityIndicator()
+        }
+    }
+    
+    func hiddenActivityIndicator() {
+        DispatchQueue.main.async {[weak self] in
+            self?.desactivateActivityIndicator()
+        }
+    }
+    
     func logInErrors(error: LogInErrors) {
+        DispatchQueue.main.async {[weak self] in
+            self?.desactivateActivityIndicator()
+        }
+        
         switch error {
         case .invalidateEmail:
             emailErrorLabel.text = error.rawValue

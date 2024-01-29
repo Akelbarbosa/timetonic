@@ -36,6 +36,7 @@ class LogInRouter: LogInRouterInput {
     }
     
     func goToListBook() {
+        debugPrint(#function)
         sceneDelegate?.setRootViewController(ListBooksRouter().createModule())
     }
 }

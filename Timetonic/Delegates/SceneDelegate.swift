@@ -15,11 +15,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let view = LogInRouter().createModule()
- 
-        let navigationController = UINavigationController(rootViewController: view)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+        currentScene = scene
+
+        if SessionManager.shared.hasActiveSession() {
+            self.setRootViewController(ListBooksRouter().createModule())
+        } else {
+            self.setRootViewController(LogInRouter().createModule())
+        }
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

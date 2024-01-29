@@ -10,10 +10,15 @@ import Foundation
 //MARK: - Protocols
 protocol ListBooksInteractorInput {
     
+    func getAllBook(sessKey: String, o_u: String)
+    
+    
 }
 
 protocol ListBooksInteractorDelegate: AnyObject {
+    func listBooks(listBooks: [ListBookEntity])
     
+    func errorToGetListBook(error: Error)
 }
 
 //MARK: - Class
@@ -28,5 +33,16 @@ class ListBooksInteractor: ListBooksInteractorInput {
     }
     
     //MARK: - Methods
-    
+    func getAllBook(sessKey: String, o_u: String) {
+        Task {
+            do {
+                let result = try await apiCaller.getAllBooks(sessKey: sessKey, o_u: o_u)
+                delegate?.listBooks(listBooks: result)
+            } catch {
+                delegate?.errorToGetListBook(error: error)
+            }
+        }
+        
+        
+    }
 }

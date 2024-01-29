@@ -17,6 +17,8 @@ protocol ApiCaller {
     func authOAuthKey(email: String, password: String, appKey: String) async throws -> [String: Any]
     
     func createSesskey(oauthKey: String, o_u: String) async throws -> [String: Any]
+    
+    func getAllBooks(sessKey: String, o_u: String) async throws -> [ListBookEntity] 
 }
 
 //MARK: - Class
@@ -24,8 +26,8 @@ class ApiCallers: ApiCaller {
     static let shared = ApiCallers()
     
     let url = "https://timetonic.com/live/api.php"
-    
-    //MARK: Fetch
+    let urlImageBase = "https://timetonic.com/live"
+    //MARK: - Fetch
     private func apiRequest(url: String, parameters: [String: String]) async throws -> [String: Any] {
         guard let url = URL(string: url) else {
             throw NSError(domain: "Invalid URL", code: 0)
@@ -89,4 +91,43 @@ class ApiCallers: ApiCaller {
         
         return try await apiRequest(url: url, parameters: parameters)
     }
+    
+    //MARK: - Get All Books
+    func getAllBooks(sessKey: String, o_u: String) async throws -> [ListBookEntity] {
+        var listBooks: [ListBookEntity] = []
+        
+        let parameters = [
+            "version": "1.47",
+            "req": "getAllBooks",
+            "o_u": o_u,
+            "u_c": o_u,
+            "sesskey": sessKey
+        ]
+
+        let result = try await apiRequest(url: url, parameters: parameters)
+        guard let allBooks = result["allBooks"] as? [String: Any] else {
+            throw NSError(domain: "Error to try decoder", code: 0)
+            
+        }
+        
+
+        if let books = allBooks["books"] as? [[String: Any]] {
+            for book in books {
+                if let ownerPrefs = book["ownerPrefs"] as? [String: Any] {
+                    
+                    guard let title = ownerPrefs["title"] as? String,
+                          let urlImage = ownerPrefs["oCoverImg"] as? String else {
+                        throw NSError(domain: "Error to try decoder", code: 0)
+                    }
+                   
+                    let urlImageFormatting = urlImage.replacingOccurrences(of: "/dev", with: "")
+                    listBooks.append(ListBookEntity(title: title, imageUrl: urlImageBase + urlImageFormatting))
+      
+                }
+            }
+        }
+
+        return listBooks
+    }
 }
+

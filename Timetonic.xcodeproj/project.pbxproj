@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C414B57B2B64664500B92542 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B57A2B64664500B92542 /* AppDelegate.swift */; };
 		C414B57D2B64664500B92542 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B57C2B64664500B92542 /* SceneDelegate.swift */; };
-		C414B57F2B64664500B92542 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B57E2B64664500B92542 /* ViewController.swift */; };
 		C414B5842B64664800B92542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C414B5832B64664800B92542 /* Assets.xcassets */; };
 		C414B5902B64683F00B92542 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B58F2B64683F00B92542 /* LogInView.swift */; };
 		C414B5922B64685000B92542 /* LogInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B5912B64685000B92542 /* LogInRouter.swift */; };
@@ -25,13 +24,16 @@
 		C414B5AB2B654D5D00B92542 /* ListBooksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B5AA2B654D5D00B92542 /* ListBooksRouter.swift */; };
 		C414B5AD2B654D6F00B92542 /* ListBooksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B5AC2B654D6F00B92542 /* ListBooksPresenter.swift */; };
 		C414B5AF2B654D8200B92542 /* ListBooksInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B5AE2B654D8200B92542 /* ListBooksInteractor.swift */; };
+		C414B5B32B675EFA00B92542 /* ListBookEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B5B22B675EFA00B92542 /* ListBookEntity.swift */; };
+		C414B5B62B676E3E00B92542 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C414B5B52B676E3E00B92542 /* SDWebImage */; };
+		C414B5B82B676E3E00B92542 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C414B5B72B676E3E00B92542 /* SDWebImageMapKit */; };
+		C414B5BB2B676F2500B92542 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414B5BA2B676F2500B92542 /* BookCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C414B5772B64664500B92542 /* Timetonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timetonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C414B57A2B64664500B92542 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C414B57C2B64664500B92542 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C414B57E2B64664500B92542 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C414B5832B64664800B92542 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C414B5882B64664800B92542 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C414B58F2B64683F00B92542 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
@@ -48,6 +50,8 @@
 		C414B5AA2B654D5D00B92542 /* ListBooksRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBooksRouter.swift; sourceTree = "<group>"; };
 		C414B5AC2B654D6F00B92542 /* ListBooksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBooksPresenter.swift; sourceTree = "<group>"; };
 		C414B5AE2B654D8200B92542 /* ListBooksInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBooksInteractor.swift; sourceTree = "<group>"; };
+		C414B5B22B675EFA00B92542 /* ListBookEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBookEntity.swift; sourceTree = "<group>"; };
+		C414B5BA2B676F2500B92542 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C414B5B82B676E3E00B92542 /* SDWebImageMapKit in Frameworks */,
+				C414B5B62B676E3E00B92542 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,16 +86,14 @@
 		C414B5792B64664500B92542 /* Timetonic */ = {
 			isa = PBXGroup;
 			children = (
+				C414B5B12B66A8C200B92542 /* Assets */,
+				C414B5B02B66A8AA00B92542 /* Delegates */,
 				C414B5A72B654D3100B92542 /* ListBooks */,
 				C414B5A42B65481900B92542 /* Managers */,
 				C414B5A12B64C27200B92542 /* ApiCallers */,
 				C414B59A2B647C3000B92542 /* Helpers */,
 				C414B5972B647A7400B92542 /* Commons */,
 				C414B58E2B64680800B92542 /* LogIn */,
-				C414B57A2B64664500B92542 /* AppDelegate.swift */,
-				C414B57C2B64664500B92542 /* SceneDelegate.swift */,
-				C414B57E2B64664500B92542 /* ViewController.swift */,
-				C414B5832B64664800B92542 /* Assets.xcassets */,
 				C414B5882B64664800B92542 /* Info.plist */,
 			);
 			path = Timetonic;
@@ -143,12 +147,39 @@
 		C414B5A72B654D3100B92542 /* ListBooks */ = {
 			isa = PBXGroup;
 			children = (
+				C414B5B92B676EEE00B92542 /* Cell */,
 				C414B5A82B654D4900B92542 /* ListBooksView.swift */,
 				C414B5AA2B654D5D00B92542 /* ListBooksRouter.swift */,
 				C414B5AC2B654D6F00B92542 /* ListBooksPresenter.swift */,
 				C414B5AE2B654D8200B92542 /* ListBooksInteractor.swift */,
+				C414B5B22B675EFA00B92542 /* ListBookEntity.swift */,
 			);
 			path = ListBooks;
+			sourceTree = "<group>";
+		};
+		C414B5B02B66A8AA00B92542 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C414B57C2B64664500B92542 /* SceneDelegate.swift */,
+				C414B57A2B64664500B92542 /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		C414B5B12B66A8C200B92542 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C414B5832B64664800B92542 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		C414B5B92B676EEE00B92542 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C414B5BA2B676F2500B92542 /* BookCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +198,10 @@
 			dependencies = (
 			);
 			name = Timetonic;
+			packageProductDependencies = (
+				C414B5B52B676E3E00B92542 /* SDWebImage */,
+				C414B5B72B676E3E00B92542 /* SDWebImageMapKit */,
+			);
 			productName = Timetonic;
 			productReference = C414B5772B64664500B92542 /* Timetonic.app */;
 			productType = "com.apple.product-type.application";
@@ -195,6 +230,9 @@
 				Base,
 			);
 			mainGroup = C414B56E2B64664500B92542;
+			packageReferences = (
+				C414B5B42B676E3E00B92542 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = C414B5782B64664500B92542 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -220,7 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C414B57F2B64664500B92542 /* ViewController.swift in Sources */,
+				C414B5BB2B676F2500B92542 /* BookCell.swift in Sources */,
+				C414B5B32B675EFA00B92542 /* ListBookEntity.swift in Sources */,
 				C414B5AF2B654D8200B92542 /* ListBooksInteractor.swift in Sources */,
 				C414B57B2B64664500B92542 /* AppDelegate.swift in Sources */,
 				C414B5AB2B654D5D00B92542 /* ListBooksRouter.swift in Sources */,
@@ -440,6 +479,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C414B5B42B676E3E00B92542 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.10;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C414B5B52B676E3E00B92542 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C414B5B42B676E3E00B92542 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		C414B5B72B676E3E00B92542 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C414B5B42B676E3E00B92542 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C414B56F2B64664500B92542 /* Project object */;
 }

@@ -17,6 +17,10 @@ protocol LogInPresenterInput {
 
 protocol LogInPresenterDelegate: AnyObject {
     func logInErrors(error: LogInErrors)
+    
+    func showActivityIndicator()
+    
+    func hiddenActivityIndicator()
 }
 
 
@@ -38,6 +42,8 @@ class LogInPresenter: LogInPresenterInput {
     
     //MARK: - Methods
     func validateCredentials() {
+        delegate?.showActivityIndicator()
+        
         guard !email.isEmpty else {
             delegate?.logInErrors(error: .emptyEmail)
             return
@@ -63,10 +69,11 @@ class LogInPresenter: LogInPresenterInput {
                 let (oAuthKey, o_u) = try await authOAuth(appKey: appKey)                
                 let sessKey = try await createSesskey(oauthKey: oAuthKey, o_u: o_u)
                 
-                SessionManager.shared.startSession(sessionKey: sessKey)
+                SessionManager.shared.startSession(sessionKey: sessKey, o_u: o_u)
                 goToListBookView()
 
             } catch {
+                delegate?.hiddenActivityIndicator()
                 debugPrint("Error: \(error.localizedDescription)")
             }
         }
@@ -107,7 +114,12 @@ class LogInPresenter: LogInPresenterInput {
     }
     
     private func goToListBookView() {
-        router.goToListBook()
+
+        DispatchQueue.main.async {[weak self] in
+            self?.delegate?.hiddenActivityIndicator()
+            self?.router.goToListBook()
+        }
+       
     }
     
     
